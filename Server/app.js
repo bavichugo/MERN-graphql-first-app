@@ -11,6 +11,9 @@ const graphqlResolver = require('./graphql/resolvers');
 const auth = require('./middleware/auth');
 const { clearImage } = require('./util/file');
 
+// Add here your mongodb uri 
+const MONGODB_URI = "";
+
 const app = express();
 
 const fileStorage = multer.diskStorage({
@@ -98,12 +101,9 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(
-    'mongodb+srv://maximilian:9u4biljMQc4jjqbe@cluster0-ntrwp.mongodb.net/messages?retryWrites=true'
-  )
+  .connect(MONGODB_URI)
   .then(result => {
     app.listen(8080);
   })
   .catch(err => console.log(err));
-
 
